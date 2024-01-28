@@ -65,6 +65,7 @@ int main() {
 
     mvprintw(row - 2, 0, "row_cnt -> %d ", buffer.row_cnt);
     mvprintw(row - 3, 0, "x -> %d, y -> %d ", x, y);
+    mvprintw(row - 4, 0, "row_size -> %d ", buffer.rows[buffer.row_index].size);
 
     for (size_t i = 0; i < buffer.row_cnt; i++) {
       mvprintw(i, 0, buffer.rows[i].contents);
@@ -204,13 +205,13 @@ void handle_normal_mode(int ch, Buffer *buffer, int *y, int *x) {
     if (*y >= buffer->row_cnt - 1)
       break;
 
-    if (*x > buffer->rows[++buffer->row_index].size) {
+    if (*x > buffer->rows[++buffer->row_index].size - 1) {
       Row *curr_row = &buffer->rows[buffer->row_index];
-      *x = curr_row->size;
-      char last_char = curr_row->contents[curr_row->size];
+      *x = curr_row->size - 1;
+      char last_char = curr_row->contents[curr_row->size - 1];
 
       if (last_char == '\n')
-        *x -= 1;
+        *x = *x > 0 ? *x - 1 : 0;
     }
     buffer->curr_pos = *x;
     move(*y + 1, *x);
@@ -219,8 +220,12 @@ void handle_normal_mode(int ch, Buffer *buffer, int *y, int *x) {
     if (*y <= 0)
       break;
 
-    if (*x > buffer->rows[--buffer->row_index].size) {
-      *x = buffer->rows[buffer->row_index].size - 1;
+    if (*x  + 1 > buffer->rows[--buffer->row_index].size - 1) {
+      if (buffer->rows[buffer->row_index].size <= 1) {
+        *x = 0;
+      } else {
+        *x = buffer->rows[buffer->row_index].size - 2;
+      }
     }
     buffer->curr_pos = *x;
     move(*y - 1, *x);
