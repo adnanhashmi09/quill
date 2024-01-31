@@ -1,4 +1,4 @@
-#include<curses.h>
+#include <curses.h>
 
 #include "buffer.h"
 #include "editor_modes.h"
@@ -69,9 +69,9 @@ void handle_normal_mode(int ch, Buffer *buffer, int *y, int *x) {
     break;
   case 'l':
     curr_row = &buffer->rows[buffer->row_index];
-    if (*x >= curr_row->size - 1 && buffer->row_index == buffer->row_cnt - 1)
+    if (*x + 1 >= curr_row->size && buffer->row_index == buffer->row_cnt - 1)
       break;
-    else if (*x+1 >= curr_row->size - 1 &&
+    else if (*x + 1 >= curr_row->size - 1 &&
              buffer->row_index < buffer->row_cnt - 1) {
       *x = 0;
       *y += 1;
