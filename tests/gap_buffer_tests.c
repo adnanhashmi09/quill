@@ -43,7 +43,7 @@ void test_insert_character_in_empty_buffer() {
   insert_character(&buf, 'c');
   insert_character(&buf, 'd');
 
-  assert_condition(buf.size == 5,
+  assert_condition(buf.size == 6,
                    "Buffer size is not equal to numbe of characters");
   assert_condition(buf.capacity == MIN_BUF_SIZE,
                    "Buffer capacity changed unexpectedly");
