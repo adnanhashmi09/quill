@@ -1,4 +1,4 @@
-#include<curses.h>
+#include <curses.h>
 
 void init_curses() {
   ESCDELAY = 25;
@@ -13,5 +13,3 @@ void cleanup_curses() {
   refresh();
   endwin();
 }
-
-

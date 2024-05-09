@@ -1,5 +1,5 @@
-#include<curses.h>
-#include "editor_modes.h"
+#include "../../include/editor_modes.h"
+#include <curses.h>
 
 Mode mode = NORMAL;
 
@@ -28,9 +28,7 @@ char *stringify_mode() {
   return "NORMAL";
 }
 
-Mode get_current_mode(){
-  return mode;
-}
+Mode get_current_mode() { return mode; }
 
 void print_mode_status(int row) {
   mvprintw(row - 1, 0, "-- %s --", stringify_mode());

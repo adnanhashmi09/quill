@@ -1,8 +1,8 @@
 #include <curses.h>
 
-#include "buffer.h"
-#include "editor_modes.h"
-#include "keys.h"
+#include "../../include/buffer.h"
+#include "../../include/editor_modes.h"
+#include "../../include/keys.h"
 
 void handle_normal_mode(int ch, Buffer *buffer, int *y, int *x) {
   if (ch == INSERT_KEY) {

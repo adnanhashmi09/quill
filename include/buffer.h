@@ -1,7 +1,7 @@
 #ifndef BUFFER_H
 #define BUFFER_H
 
-#include<stdio.h>
+#include <stdio.h>
 
 typedef struct {
   char *contents;

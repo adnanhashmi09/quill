@@ -1,8 +1,8 @@
-#include<curses.h>
+#include <curses.h>
 
-#include "buffer.h"
-#include "editor_modes.h"
-#include "keys.h"
+#include "../../include/buffer.h"
+#include "../../include/editor_modes.h"
+#include "../../include/keys.h"
 
 void handle_insert_mode(int ch, Buffer *buffer, int *y, int *x) {
 
@@ -54,4 +54,3 @@ void handle_insert_mode(int ch, Buffer *buffer, int *y, int *x) {
 
   getyx(stdscr, *y, *x);
 }
-
