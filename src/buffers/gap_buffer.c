@@ -18,8 +18,8 @@ int get_amount_of_gap_buffer_used(GapBuffer *gap_buffer) {
           get_num_of_chars_after_cursor(gap_buffer));
 }
 
-int cap_double_buffer_size(size_t size) {
-  return (size > SIZE_MAX / 2) ? SIZE_MAX : size;
+int cap_double_buffer_capacity(size_t capacity) {
+  return (capacity > SIZE_MAX / 2) ? SIZE_MAX : 2 * capacity;
 }
 
 void move_memory_back(GapBuffer *buf, char *new_buf, size_t new_size) {
@@ -59,9 +59,9 @@ void shrink_buffer(GapBuffer *gap_buffer, size_t new_capacity) {
     return;
 
   gap_buffer->buffer = new_buffer;
-  gap_buffer->capacity = new_capacity;
   gap_buffer->gap_end =
       new_capacity - get_num_of_chars_after_cursor(gap_buffer);
+  gap_buffer->capacity = new_capacity;
 }
 
 GapBuffer new_gap_buffer(size_t init_size) {
@@ -129,7 +129,7 @@ bool backspace(GapBuffer *gap_buffer) {
 }
 
 bool delete_character(GapBuffer *gap_buffer) {
-  if (gap_buffer->gap_end == gap_buffer->size) {
+  if (gap_buffer->cursor == gap_buffer->size) {
     return false;
   }
   gap_buffer->gap_end++;
@@ -142,7 +142,7 @@ bool delete_character(GapBuffer *gap_buffer) {
 
 bool insert_character(GapBuffer *gap_buffer, char c) {
   if (gap_buffer->gap_end == gap_buffer->cursor) {
-    size_t new_buf_size = cap_double_buffer_size(gap_buffer->capacity);
+    size_t new_buf_size = cap_double_buffer_capacity(gap_buffer->capacity);
     bool grow_success = grow_buffer(gap_buffer, new_buf_size);
     if (!grow_success)
       return false;
