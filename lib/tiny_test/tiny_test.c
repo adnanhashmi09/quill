@@ -64,4 +64,8 @@ void runTests() {
 
   printf("\n============TEST REPORT============\n");
   printf("Tests passed = %d, Tests failed = %d\n", passed, failed);
+
+  if (failed > 0) {
+    exit(TESTS_FAILED_ERROR_CODE);
+  }
 }
