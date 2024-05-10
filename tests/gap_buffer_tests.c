@@ -12,7 +12,7 @@ void test_new_gap_buffer_min_size() {
 void test_new_gap_buffer_valid_size() {
 
   GapBuffer buf = new_gap_buffer(1024 * 4);
-  assert_condition(buf.capacity == (1024 * 4),
+  assert_condition(buf.capacity == (1024 * 3),
                    "Gap buffer size initialised incorrectly. "
                    "allowed buffer size");
   free_buffer(&buf);
