@@ -1,8 +1,8 @@
 #ifndef GAP_BUFFER_H
 #define GAP_BUFFER_H
 
-#include <stdio.h>
 #include <stdbool.h>
+#include <stdio.h>
 
 #define MIN_BUF_SIZE 1024
 #define MAX(a, b) ((a > b) ? a : b)

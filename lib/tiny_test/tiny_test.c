@@ -1,9 +1,11 @@
-#include "../include/tiny_test.h"
-#include "../../include/error_codes.h"
-
+#include <math.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "../../include/error_codes.h"
+#include "../include/tiny_test.h"
 
 TestCase *testcases = NULL;
 TestCase *currentTest = NULL;
@@ -28,6 +30,18 @@ void addTest(char *name, void (*test_function)(void)) {
   }
   currentTest->next = NULL;
 }
+
+// Function to compare two integers
+bool compare_int(int a, int b) { return a == b; }
+
+// Function to compare two floats
+bool compare_float(float a, float b) { return fabs(a - b) < EPSILON; }
+
+// Function to compare two doubles
+bool compare_double(double a, double b) { return fabs(a - b) < EPSILON; }
+
+// Function to compare two strings
+bool compare_string(const char *a, const char *b) { return strcmp(a, b) == 0; }
 
 void assert_condition(int condition, const char *failure_message) {
   if (condition > 1 || condition < 0) {
