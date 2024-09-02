@@ -1,6 +1,6 @@
 #include "../include/gap_buffer.h"
+#include "../lib/include/malloc_size.h"
 #include "../lib/include/tiny_test.h"
-#include <malloc.h>
 #include <stddef.h>
 #include <stdint.h>
 
@@ -110,8 +110,8 @@ void test_backspace_for_shrinking_buffer() {
                    "number_of_chars_after_the_cursor ");
   assert_condition(buf.capacity == prev_capacity / 2,
                    "buffer capacity didn't get half of its original size.");
-  assert_condition((malloc_usable_size(buf.buffer) >= buf.capacity &&
-                    malloc_usable_size(buf.buffer) < prev_capacity),
+  assert_condition((get_malloc_size(buf.buffer) >= buf.capacity &&
+                    get_malloc_size(buf.buffer) < prev_capacity),
                    "Buffer actual capacity didn't decrease");
   free_buffer(&buf);
 }
@@ -141,8 +141,8 @@ void test_multiple_backspace_on_buffer_significantly_larger_than_required_size()
                    "number_of_chars_after_the_cursor ");
   assert_condition(buf.capacity == prev_capacity / 4,
                    "buffer capacity didn't get 1/4th of its original size.");
-  assert_condition((malloc_usable_size(buf.buffer) >= buf.capacity &&
-                    malloc_usable_size(buf.buffer) < prev_capacity),
+  assert_condition((get_malloc_size(buf.buffer) >= buf.capacity &&
+                    get_malloc_size(buf.buffer) < prev_capacity),
                    "Buffer actual capacity didn't decrease");
 
   backspace(&buf);
