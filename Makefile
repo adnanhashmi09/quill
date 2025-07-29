@@ -1,5 +1,6 @@
 CC = gcc
 LDFLAGS = -lncurses
+TEST_LDFLAGS = -ltinytest -L./lib/shared_libs/
 DEPFLAGS = -MP -MD
 CFLAGS = -Wall -Wextra -std=c11 $(DEPFLAGS)
 
@@ -46,12 +47,13 @@ $(OBJ_DIR):
 	mkdir -p $@
 
 run-tests: test
-	$(TEST_TARGET)
+	DYLD_LIBRARY_PATH=./lib/shared_libs/ $(TEST_TARGET)
+
 test: $(TEST_TARGET) $(INCLUDE_FILES)
 
 $(TEST_TARGET): $(TEST_OBJECTS) $(SHARED_OBJECTS) $(LIB_OBJECTS)
 	@mkdir -p $(TEST_BUILD_DIR)
-	$(CC) $(CFLAGS) $(TEST_OBJECTS) $(SHARED_OBJECTS) $(LIB_OBJECTS) $(LDFLAGS) -I$(INCLUDE_DIR) -I$(LIB_INCLUDE_DIR) -o $@
+	$(CC) $(CFLAGS) $(TEST_OBJECTS) $(SHARED_OBJECTS) $(LIB_OBJECTS) $(LDFLAGS) -I$(INCLUDE_DIR) -I$(LIB_INCLUDE_DIR) -o $@ $(TEST_LDFLAGS)
 
 $(OBJ_DIR)/lib/%.o: $(LIB_DIR)/%.c
 	@mkdir -p $$(dirname $@)

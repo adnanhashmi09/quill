@@ -1,6 +1,6 @@
 #include "../include/gap_buffer.h"
 #include "../lib/include/malloc_size.h"
-#include "../lib/include/tiny_test.h"
+#include "../lib/include/tinytest.h"
 #include <stddef.h>
 #include <stdint.h>
 

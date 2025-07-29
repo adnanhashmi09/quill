@@ -1,5 +1,4 @@
 #include <curses.h>
-#include <stdio.h>
 #include <stdlib.h>
 
 #include "../include/buffer.h"

@@ -1,4 +1,4 @@
-#include "../lib/include/tiny_test.h"
+#include "../lib/include/tinytest.h"
 #include "./gap_buffer_tests.h"
 int main() {
   addTest("Test new_gap_buffer() when invalid size is given",
